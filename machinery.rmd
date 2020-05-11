@@ -4,33 +4,25 @@ library(lubridate)
 library(rvest)
 library(dplyr)
 ```
-
 ```{r}
 url <- "https://www.stats.govt.nz/assets/Uploads/Research-and-development-survey/Research-and-development-survey-2019/Download-data/research-and-development-survey-2019-csv.csv"
 machinery <- read.csv(url(url), encoding = "UTF-8", na = c("NULL", "NONE"))
 
 machinery
 ```
-
-
-
 ```{r}
 machinery <- machinery %>%
-  select (Breakdown, Year,Value )
-
+select (Breakdown, Year,Value )
 machinery
 ```
-
-
 ```{r}
 machinery<- machinery %>%
-  filter(Breakdown == "10_Machinery and equipment manufacturing")
+filter(Breakdown == "10_Machinery and equipment manufacturing")
 machinery
 ```
-
 ```{r}
 machinery_techserv <- merge(machinery, techserv, all=TRUE) %>%
-  arrange(Year)
+arrange(Year)
 ```
 
 ```{r}
@@ -41,20 +33,12 @@ write.csv(machinery_techserv, "machinery_techserv.csv", row.names = FALSE)
 read.csv("machinery_techserv.csv")
 ```
 
-
-
-
-
 ```{r}
 chart <- read_csv("machinery_techserv.csv")
 ggplot(chart, aes(Year, Value, color = Breakdown)) +
-
- geom_step(aes(color=Breakdown))
-  theme_minimal()
+geom_step(aes(color=Breakdown))
+theme_minimal()
 ggsave("machinery_techserv.png",width=16, height = 10, units= "cm")
-
-  
- 
 
 ```
 
