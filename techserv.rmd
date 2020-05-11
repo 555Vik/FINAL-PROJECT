@@ -4,23 +4,20 @@ library(lubridate)
 library(rvest)
 library(dplyr)
 ```
-
 ```{r}
 url <- "https://www.stats.govt.nz/assets/Uploads/Research-and-development-survey/Research-and-development-survey-2019/Download-data/research-and-development-survey-2019-csv.csv"
 techserv <- read.csv(url(url), encoding = "UTF-8", na = c("NULL", "NONE"))
 
 techserv 
 ```
-
 ```{r}
 techserv  <- techserv  %>%
-  select (Breakdown, Year,Value )
-
+select (Breakdown, Year,Value )
 techserv 
 ```
 
 ```{r}
 techserv  <- techserv  %>%
-  filter(Breakdown == "15_Scientific research and technical services")
+filter(Breakdown == "15_Scientific research and technical services")
 techserv 
 ```
