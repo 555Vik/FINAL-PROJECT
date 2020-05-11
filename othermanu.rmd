@@ -18,7 +18,6 @@ select (Breakdown, Year,Value )
 
 othermanu
 ```
-
 ```{r}
 othermanu <- othermanu %>%
 filter(Breakdown == "11_Other manufacturing")
