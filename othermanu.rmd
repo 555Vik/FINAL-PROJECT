@@ -1,0 +1,29 @@
+```{r}
+library(tidyverse)
+library(lubridate)
+library(rvest)
+library(dplyr)
+```
+
+```{r}
+url <- "https://www.stats.govt.nz/assets/Uploads/Research-and-development-survey/Research-and-development-survey-2019/Download-data/research-and-development-survey-2019-csv.csv"
+othermanu <- read.csv(url(url), encoding = "UTF-8", na = c("NULL", "NONE"))
+
+othermanu
+```
+
+```{r}
+othermanu <- othermanu %>%
+select (Breakdown, Year,Value )
+
+othermanu
+```
+
+```{r}
+othermanu <- othermanu %>%
+filter(Breakdown == "11_Other manufacturing")
+othermanu
+```
+
+
+

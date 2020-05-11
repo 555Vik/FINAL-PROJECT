@@ -1,0 +1,59 @@
+```{r}
+library(tidyverse)
+library(lubridate)
+library(rvest)
+library(dplyr)
+```
+
+```{r}
+url <- "https://www.stats.govt.nz/assets/Uploads/Research-and-development-survey/Research-and-development-survey-2019/Download-data/research-and-development-survey-2019-csv.csv"
+compserv <- read.csv(url(url), encoding = "UTF-8", na = c("NULL", "NONE"))
+
+compserv
+```
+
+
+
+```{r}
+compserv <- compserv %>%
+select (Breakdown, Year,Value )
+compserv
+```
+
+
+```{r}
+compserv <- compserv %>%
+filter(Breakdown == "16_Computer services")
+compserv
+```
+```{r}
+compserv_othermanu <- merge(compserv, othermanu, all=TRUE) %>%
+arrange(Year)
+```
+
+```{r}
+write.csv(compserv_othermanu, "compserv_othermanui.csv", row.names = FALSE)
+```
+
+```{r}
+read.csv("compserv_othermanui.csv")
+```
+
+
+
+
+```{r}
+chart <- read.csv("compserv_othermanui.csv")
+
+  ggplot(chart, aes(Year, Value, color = Breakdown)) +
+  geom_line(color="#213236") +
+  geom_col(fill ="#E8D47D") +
+    
+theme_minimal()
+  
+ggsave("compserv_othermanui.png",width=16, height = 10, units= "cm")
+```
+
+
+
+
